@@ -8,7 +8,7 @@ export function Footer() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
                     {/* Brand */}
                     <div className="col-span-1 md:col-span-1">
-                        <h2 className="text-2xl font-serif font-bold text-rose-500 mb-4">Makeover Artistry</h2>
+                        <h2 className="text-2xl font-serif font-bold text-rose-500 mb-4">Janani Makeover Artistry</h2>
                         <p className="text-gray-400 mb-6">
                             Empowering beauty and confidence through professional artistry. Specialized in bridal, party, and editorial makeup.
                         </p>
@@ -64,7 +64,7 @@ export function Footer() {
                 </div>
 
                 <div className="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
-                    <p>&copy; {new Date().getFullYear()} Makeover Artistry. All rights reserved.</p>
+                    <p>&copy; {new Date().getFullYear()} Janani Makeover Artistry. All rights reserved.</p>
                 </div>
             </div>
         </footer>

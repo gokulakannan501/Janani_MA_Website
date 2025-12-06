@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
 
 export const metadata: Metadata = {
-  title: 'Makeover Artistry - Premium Makeup Services',
+  title: 'Janani Makeover Artistry - Premium Makeup Services',
   description: 'Professional makeup artist services for weddings, parties, and events.',
 };
 

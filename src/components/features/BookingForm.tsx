@@ -7,7 +7,7 @@ import { CheckCircle, AlertCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export function BookingForm() {
-    const [formData, setFormData] = useState({
+    const initialFormData = {
         name: '',
         email: '',
         phone: '',
@@ -15,7 +15,8 @@ export function BookingForm() {
         serviceId: '',
         guests: 1,
         notes: ''
-    });
+    };
+    const [formData, setFormData] = useState(initialFormData);
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -52,6 +53,7 @@ _Sent via Website_`;
             window.open(whatsappUrl, '_blank');
 
             setStatus('success');
+            setFormData(initialFormData);
         } catch (error) {
             setStatus('error');
         }

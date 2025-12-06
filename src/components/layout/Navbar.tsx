@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -9,6 +10,9 @@ import { Button } from '@/components/ui/button';
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const pathname = usePathname();
+    const isHome = pathname === '/';
+    const isTransparent = isHome && !scrolled;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -30,7 +34,7 @@ export function Navbar() {
     return (
         <nav className={cn(
             "fixed w-full z-50 transition-all duration-300",
-            scrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-2" : "bg-transparent py-4 text-white"
+            isTransparent ? "bg-transparent py-4 text-white" : "bg-white/90 backdrop-blur-md shadow-sm py-2"
         )}>
             {/* Note: Logic for text color change based on scroll is tricky if hero is dark. 
           Assuming hero needs white text, but scrolled needs black. 
@@ -39,9 +43,9 @@ export function Navbar() {
             <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
                 <Link href="/" className={cn(
                     "text-2xl font-bold font-serif transition-colors",
-                    scrolled ? "text-rose-500" : "text-white shadow-sm"
+                    isTransparent ? "text-white shadow-sm" : "text-rose-500"
                 )}>
-                    Makeover Artistry
+                    Janani Makeover Artistry
                 </Link>
 
                 {/* Desktop Nav */}
@@ -52,14 +56,14 @@ export function Navbar() {
                             href={link.href}
                             className={cn(
                                 "transition-colors font-medium hover:text-rose-500",
-                                scrolled ? "text-gray-700" : "text-gray-100 hover:text-white"
+                                isTransparent ? "text-gray-100 hover:text-white" : "text-gray-700"
                             )}
                         >
                             {link.name}
                         </Link>
                     ))}
                     <Link href="/booking">
-                        <Button variant="primary" size="md" className={scrolled ? "" : "bg-white text-rose-500 hover:bg-gray-100"}>
+                        <Button variant="primary" size="md" className={isTransparent ? "bg-white text-rose-500 hover:bg-gray-100" : ""}>
                             Book Now
                         </Button>
                     </Link>
@@ -67,7 +71,7 @@ export function Navbar() {
 
                 {/* Mobile menu button */}
                 <button
-                    className={cn("md:hidden transition-colors", scrolled ? "text-gray-700" : "text-white")}
+                    className={cn("md:hidden transition-colors", isTransparent ? "text-white" : "text-gray-700")}
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     {isOpen ? <X className="text-gray-800" /> : <Menu />}
