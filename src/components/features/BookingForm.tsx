@@ -28,10 +28,8 @@ export function BookingForm() {
         e.preventDefault();
         setStatus('submitting');
 
-        // Simulate processing for UX
+        // Removed simulated processing delay for iOS compatibility
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
             // Construct WhatsApp Message
             const serviceName = services.find(s => s.id === formData.serviceId)?.title || 'Custom Service';
             const message = `*New Booking Request*
