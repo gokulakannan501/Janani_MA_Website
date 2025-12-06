@@ -1,6 +1,9 @@
-# Makeover Artistry Website
+# Janani Makeover Artistry Website
 
-A modern, elegant website for a professional makeover artist, built with Next.js 15, Tailwind CSS, and Framer Motion.
+Professional portfolio and booking website for Janani Makeover Artistry.
+
+## 🚀 Live Demo
+[View Live Site on Vercel](https://janani-ma-website.vercel.app)
 
 ## 🚀 Getting Started
 
