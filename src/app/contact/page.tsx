@@ -1,7 +1,43 @@
+"use client";
+
+import { useState } from 'react';
 import { Mail, MapPin, Phone, Instagram, Facebook, Twitter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function ContactPage() {
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        subject: '',
+        message: ''
+    });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const { id, value } = e.target;
+        setFormData(prev => ({ ...prev, [id]: value }));
+    };
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        const whatsappMessage = `*New Inquiry via Website*
+----------------
+👤 *Name:* ${formData.name}
+✉️ *Email:* ${formData.email}
+📝 *Subject:* ${formData.subject}
+💬 *Message:* ${formData.message}
+
+_Sent via Website_`;
+
+        const phoneNumber = '919865455825';
+        const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+        window.open(url, '_blank');
+
+        // Reset form
+        setFormData({ name: '', email: '', subject: '', message: '' });
+    };
+
     return (
         <div className="pt-24 pb-20">
             <div className="container mx-auto px-4 md:px-6">
@@ -57,24 +93,52 @@ export default function ContactPage() {
                     {/* Contact Form */}
                     <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100">
                         <h2 className="text-2xl font-bold font-serif mb-6">Send a Message</h2>
-                        <form className="space-y-4">
+                        <form className="space-y-4" onSubmit={handleSubmit}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
                                     <label htmlFor="name" className="text-sm font-medium text-gray-700">Name</label>
-                                    <input type="text" id="name" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none" required />
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        value={formData.name}
+                                        onChange={handleChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+                                        required
+                                    />
                                 </div>
                                 <div className="space-y-2">
                                     <label htmlFor="email" className="text-sm font-medium text-gray-700">Email</label>
-                                    <input type="email" id="email" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none" required />
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+                                        required
+                                    />
                                 </div>
                             </div>
                             <div className="space-y-2">
                                 <label htmlFor="subject" className="text-sm font-medium text-gray-700">Subject</label>
-                                <input type="text" id="subject" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none" required />
+                                <input
+                                    type="text"
+                                    id="subject"
+                                    value={formData.subject}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+                                    required
+                                />
                             </div>
                             <div className="space-y-2">
                                 <label htmlFor="message" className="text-sm font-medium text-gray-700">Message</label>
-                                <textarea id="message" rows={5} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none" required></textarea>
+                                <textarea
+                                    id="message"
+                                    rows={5}
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-rose-500 focus:border-transparent outline-none"
+                                    required
+                                ></textarea>
                             </div>
                             <Button type="submit" size="lg" className="w-full">Send Message</Button>
                         </form>
@@ -85,3 +149,4 @@ export default function ContactPage() {
         </div>
     );
 }
+
